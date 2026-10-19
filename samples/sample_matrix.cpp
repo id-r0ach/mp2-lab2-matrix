@@ -30,11 +30,5 @@ void main() {
   cout << "Matrix b = " << endl << b << endl;
   cout << "Matrix c = a + b" << endl << c << endl;
   */
-    TDynamicVector<int> v1(5), v2(10), v3(5);
-    cin >> v1;
-    cin >> v2;
-    cin >> v3;
-    cout << (v1 == v2);
-    cout << v2;
 }
 //---------------------------------------------------------------------------

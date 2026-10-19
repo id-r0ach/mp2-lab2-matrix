@@ -26,10 +26,18 @@ public:
   TDynamicVector(size_t size = 1) : sz(size) {
     if (sz == 0)
       throw out_of_range("Vector size should be greater than zero");
+    if (sz > MAX_VECTOR_SIZE) {
+        throw out_of_range("Vector is too large");
+    }
     pMem = new T[sz]();// {}; // У типа T д.б. констуктор по умолчанию
   }
 
   TDynamicVector(T* arr, size_t s) : sz(s) {
+      if (sz == 0)
+          throw out_of_range("Vector size should be greater than zero");
+      if (sz > MAX_VECTOR_SIZE) {
+          throw out_of_range("Vector is too large");
+      }
     assert(arr != nullptr && "TDynamicVector ctor requires non-nullptr arg");
     pMem = new T[sz];
     std::copy(arr, arr + sz, pMem);
@@ -44,7 +52,8 @@ public:
   TDynamicVector(TDynamicVector&& v) noexcept {
       sz = v.sz;
       pMem = v.pMem;
-      pMem = nullptr;
+      v.pMem = nullptr;
+      v.sz = 0;
   }
 
   ~TDynamicVector() {
@@ -54,13 +63,23 @@ public:
       }
   }
   TDynamicVector& operator=(const TDynamicVector& v) {
-      TDynamicVector temp(v);
-      return *v;
+      if (this != &v) {
+          TDynamicVector temp(v);
+          std::swap(sz, temp.sz);
+          std::swap(pMem, temp.pMem);
+      }
+      return *this;
   }
 
   TDynamicVector& operator=(TDynamicVector&& v) noexcept {
-      TDynamicVector temp(v);
-      return v;
+      if (this != &v) {
+          delete[] pMem;
+          sz = v.sz;
+          pMem = v.pMem;
+          v.pMem = nullptr;
+          v.sz = 0;
+      }
+      return *this;
   }
 
   size_t size() const noexcept { return sz; }
@@ -103,7 +122,7 @@ public:
   }
 
   bool operator!=(const TDynamicVector& v) const noexcept {
-      return !((*this) != v);
+      return !((*this) == v);
   }
 
   // скалярные операции
@@ -158,11 +177,11 @@ public:
       if (sz != v.sz) {
           throw "different vector sizes";
       }
-      TDynamicVector temp(*this);
+      T res = T();
       for (int i = 0; i < sz; i++) {
-          temp.pMem[i] *= v.pMem[i];
+          res += pMem[i] * v.pMem[i];
       }
-      return temp;
+      return res;
   }
 
   friend void swap(TDynamicVector& lhs, TDynamicVector& rhs) noexcept
