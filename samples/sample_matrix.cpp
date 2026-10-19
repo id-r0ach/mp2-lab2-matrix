@@ -8,8 +8,11 @@
 #include "tmatrix.h"
 //---------------------------------------------------------------------------
 
-void main()
-{
+void main() {
+    using std::cout;
+    using std::cin;
+    using std::endl;
+    /*
   TDynamicMatrix<int> a(5), b(5), c(5);
   int i, j;
 
@@ -26,5 +29,12 @@ void main()
   cout << "Matrix a = " << endl << a << endl;
   cout << "Matrix b = " << endl << b << endl;
   cout << "Matrix c = a + b" << endl << c << endl;
+  */
+    TDynamicVector<int> v1(5), v2(10), v3(5);
+    cin >> v1;
+    cin >> v2;
+    cin >> v3;
+    cout << (v1 == v2);
+    cout << v2;
 }
 //---------------------------------------------------------------------------
