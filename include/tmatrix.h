@@ -272,14 +272,14 @@ public:
       return tmp;
   }
   TDynamicMatrix operator*(const TDynamicMatrix& m) {
-      TDynamicMatrix tmp;
+      TDynamicMatrix tmp(sz);
       if (m.size() != this->size()) {
           throw "Error different matrix sizes";
       }
       for (int i = 0; i < sz; i++) {
           for (int j = 0; j < sz; j++) {
               for (int k = 0; k < sz; k++) {
-                  tmp += pMem[i][k] * m.pMem[k][j];
+                  tmp.pMem[i][j] += pMem[i][k] * m.pMem[k][j];
               }
           }
       }
