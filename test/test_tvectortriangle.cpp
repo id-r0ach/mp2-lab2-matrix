@@ -129,9 +129,7 @@ TEST(TDynamicVectorTriangle, can_add_scalar_to_vector)
 	}
 	TDynamicVectorTriangle<int> res;
 	ASSERT_NO_THROW(res = v + 3);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] + 3, res[i]);
-	}
+	ASSERT_EQ(v + 3, res);
 }
 
 TEST(TDynamicVectorTriangle, can_subtract_scalar_from_vector)
@@ -142,9 +140,7 @@ TEST(TDynamicVectorTriangle, can_subtract_scalar_from_vector)
 	}
 	TDynamicVectorTriangle<int> res;
 	ASSERT_NO_THROW(res = v - 3);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] - 3, res[i]);
-	}
+	ASSERT_EQ(v - 3, res);
 }
 
 TEST(TDynamicVectorTriangle, can_multiply_scalar_by_vector)
@@ -155,9 +151,7 @@ TEST(TDynamicVectorTriangle, can_multiply_scalar_by_vector)
 	}
 	TDynamicVectorTriangle<int> res;
 	ASSERT_NO_THROW(res = v * 3);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] * 3, res[i]);
-	}
+	ASSERT_EQ(v * 3, res);
 }
 
 TEST(TDynamicVectorTriangle, can_add_vectors_with_equal_size)
@@ -166,9 +160,7 @@ TEST(TDynamicVectorTriangle, can_add_vectors_with_equal_size)
 	TDynamicVectorTriangle<int> v1(3);
 	TDynamicVectorTriangle<int> res;
 	ASSERT_NO_THROW(res = v + v1);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] + v1[i], res[i]);
-	}
+	ASSERT_EQ(v + v1, res);
 }
 
 TEST(TDynamicVectorTriangle, cant_add_vectors_with_not_equal_size)
@@ -184,9 +176,7 @@ TEST(TDynamicVectorTriangle, can_subtract_vectors_with_equal_size)
 	TDynamicVectorTriangle<int> v1(3);
 	TDynamicVectorTriangle<int> res;
 	ASSERT_NO_THROW(res = v - v1);
-	for (int i = 0; i < 3; i++) {
-		ASSERT_EQ(v[i] - v1[i], res[i]);
-	}
+	ASSERT_EQ(v - v1, res);
 }
 
 TEST(TDynamicVectorTriangle, cant_subtract_vectors_with_not_equal_size)
